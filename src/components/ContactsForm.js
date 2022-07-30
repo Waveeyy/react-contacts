@@ -4,13 +4,13 @@ import Form from "react-bootstrap/Form";
 
 function ContactsForm({ addUser }) {
   const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
+  const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    addUser({ name, contact, location });
+    addUser({ name, phone, location });
     setName("");
-    setContact("");
+    setPhone("");
     setLocation("");
   };
   return (
@@ -32,10 +32,10 @@ function ContactsForm({ addUser }) {
           <Form.Label>Contact</Form.Label>
           <Form.Control
             type="contact"
-            value={contact}
+            value={phone}
             placeholder="egs. 020*******"
             onChange={(e) => {
-              setContact(e.target.value);
+              setPhone(e.target.value);
             }}
           />
         </Form.Group>
