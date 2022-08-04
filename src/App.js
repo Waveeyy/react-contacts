@@ -9,14 +9,36 @@ import React, { useState } from "react";
 
 function App() {
   const [users, setUsers] = useState([
-    { name: "Nana Ab", phone: "0245768594", location: "kwabenya" },
-    { name: "kwabena", phone: "0245768594", location: "east legon" },
+    {
+      name: "Nana Ab",
+      phone: "0245768594",
+      location: "kwabenya",
+      id: "shdhsds",
+    },
+    {
+      name: "kwabena",
+      phone: "0245768594",
+      location: "east legon",
+      id: "sdbshds",
+    },
   ]);
   const newUser = (user) => {
+    user.id = Math.random().toString(36);
     setUsers([
       ...users,
-      { name: user.name, phone: user.phone, location: user.location },
+      {
+        id: user.id,
+        name: user.name,
+        phone: user.phone,
+        location: user.location,
+      },
     ]);
+  };
+  const deleteContact = (id) => {
+    setUsers(users.filter((user) => user.id !== id));
+  };
+  const handleEditContact = (id, newInfo) => {
+    setUsers(users.map((user) => (user.id === id ? newInfo : user)));
   };
   return (
     <div>
@@ -26,7 +48,11 @@ function App() {
             <ContactsForm addUser={newUser} />
           </Col>
           <Col md={6}>
-            <Contacts userData={users} />
+            <Contacts
+              userData={users}
+              deleteContact={deleteContact}
+              editContact={handleEditContact}
+            />
           </Col>
         </Row>
       </Container>
